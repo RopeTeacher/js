@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #result{
+            width: 200px;
+            height: 100px;
+            border: solid 1px #9900bb;
+        }
+    </style>
+</head>
+<body>
+    <button>请点击</button>
+    <div id="result"></div>
+
+    <script>
+        let button = document.getElementsByTagName('button')[0];
+        let element = document.querySelector('#result');
+        button.onclick = function () {
+            let request = new XMLHttpRequest();
+            request.timeout = 2000;
+            request.ontimeout = function(){
+                alert("超时");
+            }
+            request.onerror = function(){
+                alert("error");
+            }
+            request.open('GET','http://127.0.0.1:8000/delay');
+            request.send();
+            request.onreadystatechange = function () {
+                if(request.readyState === 4){
+                    if(request.status >= 200 && request.status < 300){
+                        element.innerHTML = request.response;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

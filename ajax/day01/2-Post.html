@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width">
+    <title>AJAX GET请求</title>
+    <style>
+        #result{
+            width: 200px;
+            height: 100px;
+            border: solid 1px #9900bb;
+        }
+    </style>
+</head>
+<body>
+<div id="result"></div>
+
+<script>
+    const button = document.getElementById('result');
+    button.addEventListener('mouseover',function () {
+        let request = new XMLHttpRequest();
+        request.open("POST","http://127.0.0.1:8000/server")
+
+        request.send();
+
+        request.onreadystatechange = function () {
+            if(request.readyState === 4){
+                if(request.status >= 200 && request.status < 300){
+                    button.innerHTML = request.response
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

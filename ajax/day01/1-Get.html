@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width">
+    <title>AJAX GET请求</title>
+    <style>
+        #result{
+            width: 200px;
+            height: 100px;
+            border: solid 1px #9900bb;
+        }
+    </style>
+</head>
+<body>
+    <button>点击发送请求</button>
+    <div id="result"></div>
+
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        btn.onclick = function () {
+            const request = new XMLHttpRequest();
+            request.open("GET","http://127.0.0.1:8000/server")
+
+            request.send();
+
+            request.onreadystatechange = function () {
+                if(request.readyState === 4){
+                    if (request.status >= 200 && request.status < 300){
+                        console.log(request.status)
+                        console.log(request.statusText)
+                        console.log(request.getAllResponseHeaders())
+                        console.log(request.response)
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
