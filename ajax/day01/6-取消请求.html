@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>发送请求</button>
+    <button>取消请求</button>
+    <script>
+        let buttons = document.getElementsByTagName('button');
+        let request = null;
+        buttons[0].onclick = function () {
+            request = new XMLHttpRequest();
+            request.open('GET','http://127.0.0.1:8000/delay');
+            request.send();
+        }
+        buttons[1].onclick = function () {
+            request.abort();
+        }
+    </script>
+</body>
+</html>

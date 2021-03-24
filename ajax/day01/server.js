@@ -40,6 +40,16 @@ app.get('/delay',(request,response)=>{
     },3000);
 });
 
+app.all('/jquery',(request,response)=>{
+    response.setHeader("Access-Control-Allow-Origin","*")
+    const obj = {
+        id: 1,
+        name: "jack",
+        age: 19
+    }
+    response.send(JSON.stringify(obj));
+});
+
 //监听端口 启动服务
 app.listen(8000,()=>{
     console.log("服务已启动 8000端口监听中")
